@@ -123,8 +123,8 @@ That's fine. Here's how most people evaluate us:
 
 Questions? Concerns? Want to roast our approach?
 
-- Email: hello@billai.dev
-- Twitter/X: @billai_dev
+- Email: contact@billai.io
+
 
 ---
 
