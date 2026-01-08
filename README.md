@@ -1,132 +1,138 @@
 # BillAI
 
-**Monetize your AI app in minutes. No Stripe account. No company. No billing code.**
+**Monetize your ChatGPT app in 5 minutes. No company, no Stripe setup needed.**
+
+BillAI is a SaaS monetization platform for ChatGPT and MCP app developers. It provides access control and entitlements through a simple SDK, with hosted checkout powered by Stripe Connect.
 
 ---
 
 ## The Problem
 
-You built a cool AI app. Maybe it's a ChatGPT wrapper, a code assistant, or something weird and wonderful. Now you want to charge for it.
+Building a monetized ChatGPT or MCP app today means setting up a company, configuring Stripe, managing payment flows, and building access control logic—before you can charge your first user.
 
-Here's what you're facing:
-
-- Set up a Stripe account (requires business verification)
-- Figure out usage-based billing for AI tokens
-- Handle failed payments, refunds, chargebacks
-- Deal with sales tax, VAT, invoicing
-- Build a subscription management UI
-- Worry about PCI compliance
-
-You just wanted to ship a product. Now you're running a payments company.
-
-## The Solution
-
-BillAI handles all of that. You focus on your AI app; we handle everything money-related.
-
-```
-Your AI App  →  BillAI  →  Money in your bank account
-```
-
-That's it. We're the [merchant of record](./docs/merchant-of-record.md), which means we legally sell your product and pay you out. You never touch payments directly.
-
-## Who This Is For
-
-✅ Solo developers shipping AI products  
-✅ Indie hackers who want to validate before incorporating  
-✅ Side projects that might become real businesses  
-✅ Developers outside the US/EU who struggle with Stripe  
-✅ Anyone tired of billing code eating into build time  
-
-## Who This Is NOT For
-
-❌ Enterprise companies with existing billing infrastructure  
-❌ Apps requiring complex B2B contracts or custom invoicing  
-❌ Highly regulated industries (healthcare, finance)  
-❌ Products that need white-label payment processing  
-❌ If you enjoy setting up Stripe webhooks  
-
-## Quick Start (3 Steps)
-
-**Step 1: Define your product**
-
-Tell us what you're selling—a subscription, per-use credits, or one-time purchase.
-
-```
-createProduct({
-  name: "Pro Plan",
-  type: "subscription",
-  price: "$19/month"
-})
-```
-
-**Step 2: Add a payment link**
-
-Drop our hosted checkout link into your app. No frontend code needed.
-
-```
-<a href="https://pay.billai.dev/your-product">Upgrade to Pro</a>
-```
-
-**Step 3: Check access**
-
-When a user tries to access paid features, check if they've paid.
-
-```
-const access = await checkAccess(userId)
-if (access.paid) {
-  // Show the good stuff
-}
-```
-
-That's the whole integration. [Full quickstart guide →](./docs/quickstart.md)
-
-## How It Works
-
-We act as your billing department:
-
-1. **We sell your product** — Customers pay us, not you directly
-2. **We handle the mess** — Taxes, refunds, chargebacks, compliance
-3. **We pay you** — Regular payouts to your bank account
-
-No Stripe account needed. No business entity required. No billing code to maintain.
-
-[Detailed explanation →](./docs/how-it-works.md)
-
-## Documentation
-
-| Document | Description |
-|----------|-------------|
-| [Quickstart](./docs/quickstart.md) | Get up and running conceptually |
-| [How It Works](./docs/how-it-works.md) | Understand the architecture |
-| [Why Not Stripe?](./docs/why-not-stripe.md) | Honest comparison |
-| [Merchant of Record](./docs/merchant-of-record.md) | Legal structure explained |
-| [FAQ](./docs/faq.md) | Common questions and edge cases |
-| [Roadmap](./docs/roadmap.md) | What we're building next |
-
-## Pricing Philosophy
-
-We take a percentage of what you earn. If you make nothing, you pay nothing.
-
-No monthly fees. No setup costs. No minimum commitments.
-
-The exact percentage depends on your volume—reach out when you're ready.
-
-## Not Sure Yet?
-
-That's fine. Here's how most people evaluate us:
-
-1. Read the [FAQ](./docs/faq.md) to see if we've answered your concerns
-2. Check [Why Not Stripe?](./docs/why-not-stripe.md) to understand the tradeoffs
-3. Look at the [Roadmap](./docs/roadmap.md) to see where we're headed
-
-## Contact
-
-Questions? Concerns? Want to roast our approach?
-
-- Email: contact@billai.io
-
+Most developers want to focus on their product, not payment infrastructure.
 
 ---
 
-*BillAI is built by developers who got tired of writing billing code instead of shipping features.*
+## What BillAI Does
 
+- **Hosted Checkout** — Stripe Connect Express integration; no need for your own company or Stripe account
+- **Access Control SDK** — Simple API for feature gating
+- **Entitlements Engine** — User → plan → features → access status
+- **Developer Dashboard** — Manage plans, view users, configure API keys
+- **Auto-logging** — Every access check is logged for analytics
+- **One-time Purchases** — v1 supports one-time payment flows
+- **Feature Flags** — Boolean features (true/false access)
+- **Usage-Based Features** — Numeric features with limits (e.g., API calls per month)
+
+---
+
+## Who This Is For
+
+- **ChatGPT app developers** — building applications on top of ChatGPT
+- **MCP (Model Context Protocol) app developers** — building MCP servers
+- Developers who don't have existing Stripe accounts or companies
+- Developers who want to start monetizing quickly without complex payment infrastructure setup
+
+---
+
+## Who This Is NOT For
+
+> **TODO:** Non-fit criteria are not explicitly defined in current product documentation.
+
+---
+
+## High-Level Monetization Flow
+
+### Developer Setup
+
+1. Sign up on BillAI dashboard
+2. Complete Stripe Express onboarding (identity verification for payouts)
+3. Create your app and get credentials
+4. Define pricing plans with features
+5. Integrate the SDK into your ChatGPT/MCP app
+
+### End-User Payment Flow
+
+1. User requests a paid feature in your app
+2. Your app checks if the user has access
+3. If no access exists, your app creates a checkout session
+4. User completes payment via Stripe Checkout
+5. Payment confirmation updates entitlement status
+6. User gains access to the paid feature
+
+---
+
+## Merchant of Record Model
+
+> **High-level overview. Not legal advice.**
+
+**The developer is the Merchant of Record:**
+
+- Receives customer funds directly
+- Is responsible for refunds and chargebacks
+- Is the party responsible to the end customer for the purchased product or service
+
+**BillAI's role:**
+
+- Provides technical infrastructure for payment processing
+- Collects a platform application fee
+- Does not receive customer funds as the seller
+- Does not assume seller obligations
+- Is not the merchant of record
+
+**Payment architecture:**
+
+- Payments use Stripe Connect Express with direct charges
+- Funds flow directly to the developer's connected account
+- Customer card statements reflect the developer's Stripe connected account
+
+---
+
+## Limitations / Non-Goals
+
+**Explicitly out of scope for v1:**
+
+- ❌ Deliverable tracking or storage — BillAI is billing infrastructure, not content delivery
+- ❌ Subscription lifecycle management — v1 is one-time purchases only
+- ❌ Multi-product bundles — One product per checkout
+- ❌ Refund processing via API — Handle manually or via Stripe dashboard
+- ❌ Checkout UI customization — Fixed UI; no theming API
+- ❌ Webhook registration API — Webhooks configured per-app in dashboard
+- ❌ Session deletion/expiration control
+- ❌ Usage-based metering on purchases (separate from feature usage limits)
+
+**SDK design boundaries:**
+
+- Does NOT store payment state locally
+- Does NOT implement automatic polling loops
+- Does NOT redirect users to checkout (returns URL for client to present)
+- Does NOT auto-create checkout sessions
+
+---
+
+## Documentation
+
+- [Quickstart](docs/quickstart.md)
+- [How It Works](docs/how-it-works.md)
+- [Merchant of Record](docs/merchant-of-record.md)
+- [Why Not Stripe Directly?](docs/why-not-stripe.md)
+- [FAQ](docs/faq.md)
+- [Roadmap](docs/roadmap.md)
+
+---
+
+## Business Model
+
+- **Platform fee:** 7% on transactions
+- **No monthly fees** — only pay when transactions occur
+- **Fee timing:** Deducted automatically at payment time
+- **Stripe fees:** Borne by the developer (connected account), not BillAI
+
+---
+
+## Contact
+
+**Email:** contact@billai.com
+
+**Legal entity:** Intellex SAS (France)
