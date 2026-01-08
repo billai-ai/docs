@@ -27,7 +27,7 @@ BillAI handles all of that. You focus on your AI app; we handle everything money
 Your AI App  →  BillAI  →  Money in your bank account
 ```
 
-That's it. We're the [merchant of record](./merchant-of-record.md), which means we legally sell your product and pay you out. You never touch payments directly.
+That's it. We're the [merchant of record](./docs/merchant-of-record.md), which means we legally sell your product and pay you out. You never touch payments directly.
 
 ## Who This Is For
 
@@ -78,7 +78,7 @@ if (access.paid) {
 }
 ```
 
-That's the whole integration. [Full quickstart guide →](./quickstart.md)
+That's the whole integration. [Full quickstart guide →](./docs/quickstart.md)
 
 ## How It Works
 
@@ -90,18 +90,18 @@ We act as your billing department:
 
 No Stripe account needed. No business entity required. No billing code to maintain.
 
-[Detailed explanation →](./how-it-works.md)
+[Detailed explanation →](./docs/how-it-works.md)
 
 ## Documentation
 
 | Document | Description |
 |----------|-------------|
-| [Quickstart](./quickstart.md) | Get up and running conceptually |
-| [How It Works](./how-it-works.md) | Understand the architecture |
-| [Why Not Stripe?](./why-not-stripe.md) | Honest comparison |
-| [Merchant of Record](./merchant-of-record.md) | Legal structure explained |
-| [FAQ](./faq.md) | Common questions and edge cases |
-| [Roadmap](./roadmap.md) | What we're building next |
+| [Quickstart](./docs/quickstart.md) | Get up and running conceptually |
+| [How It Works](./docs/how-it-works.md) | Understand the architecture |
+| [Why Not Stripe?](./docs/why-not-stripe.md) | Honest comparison |
+| [Merchant of Record](./docs/merchant-of-record.md) | Legal structure explained |
+| [FAQ](./docs/faq.md) | Common questions and edge cases |
+| [Roadmap](./docs/roadmap.md) | What we're building next |
 
 ## Pricing Philosophy
 
@@ -115,9 +115,9 @@ The exact percentage depends on your volume—reach out when you're ready.
 
 That's fine. Here's how most people evaluate us:
 
-1. Read the [FAQ](./faq.md) to see if we've answered your concerns
-2. Check [Why Not Stripe?](./why-not-stripe.md) to understand the tradeoffs
-3. Look at the [Roadmap](./roadmap.md) to see where we're headed
+1. Read the [FAQ](./docs/faq.md) to see if we've answered your concerns
+2. Check [Why Not Stripe?](./docs/why-not-stripe.md) to understand the tradeoffs
+3. Look at the [Roadmap](./docs/roadmap.md) to see where we're headed
 
 ## Contact
 
