@@ -1,6 +1,6 @@
 # BillAI
 
-**Monetize your ChatGPT app in 5 minutes. No company, no Stripe setup needed.**
+**Monetize your ChatGPT app in 5 minutes. No company, no direct Stripe setup required by the developer.Billing is handled via a hosted checkout powered by Stripe Connect.**
 
 BillAI is a SaaS monetization platform for ChatGPT and MCP app developers. It provides access control and entitlements through a simple SDK, with hosted checkout powered by Stripe Connect.
 
